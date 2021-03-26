@@ -1,0 +1,53 @@
+{
+    "projects": [
+        {
+            "name": "Client A",
+            "category": [
+                "healthcare",
+                "people",
+                "all"
+            ]
+        },
+        {
+            "name": "Client B",
+            "category": [
+                "defense",
+                "government",
+                "all"
+            ]
+        },
+        {
+            "name": "Client C",
+            "category": [
+                "hr",
+                "people",
+                "all"
+            ]
+        },
+        {
+            "name": "Client D",
+            "category": [
+                "automotive",
+                "design",
+                "people",
+                "all"
+            ]
+        },
+        {
+            "name": "Client E",
+            "category": [
+                "environmental",
+                "design",
+                "all"
+            ]
+        },
+        {
+            "name": "Client F",
+            "category": [
+                "finance",
+                "people",
+                "all"
+            ]
+        }
+    ]
+}
