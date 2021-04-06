@@ -12,6 +12,13 @@ const useStyles = createUseStyles({
     maxWidth: 800,
     margin: '0 auto'
   },
+  headerWrapper: {
+    position: 'fixed',
+    maxWidth: 800,
+    backgroundColor: '#fff',
+    zIndex: 1,
+    borderBottom: '1px solid #333'
+  },
   pageHeader: {
     fontFamily: 'ToledoTS',
     fontSize: 30,
@@ -47,16 +54,20 @@ const useStyles = createUseStyles({
     display: 'flex',
     flexDirection: 'row',
     maxWidth: '100%',
-    margin: '20px auto',
+    margin: '0px auto',
     justifyContent: 'center',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    top: 240,
+    position: 'relative'
   },
   portfolioContainerColumn:{
     flexDirection: 'column',
     display: 'flex',
     maxWidth: 800,
-    margin: '20px auto',
-    justifyContent: 'center'
+    margin: '0px auto',
+    justifyContent: 'center',
+    top: 240,
+    position: 'relative'
   },
   toggleSwitch: {
     display: 'flex',
@@ -132,7 +143,7 @@ const FilterGrid = () => {
   for(let i = 0; i < projects.length; i++){
     projects[i].category.map(cat => categories.push(cat))
   }
-  const uniqueCategories = [...new Set(categories)]
+  const uniqueCategories = [...new Set(categories)].sort()
   
 
   useEffect(() => {
@@ -155,17 +166,19 @@ const FilterGrid = () => {
   return (
     <div className={classes.root}>
       <div className={classes.pageWrapper}>
-      <h2 className={classes.pageHeader}>Case Studies</h2>
-      <div className={classes.portfolioLabels}>
-      {uniqueCategories.map((item, i) =>
-        <a href="/#" key={i} active={filter === `${item}`} onClick={() => setFilter(`${item}`)}>
-          {item}
-        </a>
-      )}
-      </div>
-      <div className={classes.toggleSwitch}>
-          <FontAwesomeIcon title="Switch to rows" onClick={() => handleDirection(direction)} icon={faGripLines} className={classnames(classes.switch, !direction ? classes.activeSwitch : null)}/> 
-          <FontAwesomeIcon title="Switch to columns" onClick={() => handleDirection(!direction)} icon={faColumns} className={classnames(classes.switch, direction ? classes.activeSwitch : null)}/>
+        <div className={classes.headerWrapper}>
+          <h2 className={classes.pageHeader}>Case Studies</h2>
+          <div className={classes.portfolioLabels}>
+          {uniqueCategories.map((item, i) =>
+            <a href="/#" key={i} active={filter === `${item}`} onClick={() => setFilter(`${item}`)}>
+              {item}
+            </a>
+          )}
+          </div>
+          <div className={classes.toggleSwitch}>
+              <FontAwesomeIcon title="Switch to rows" onClick={() => handleDirection(direction)} icon={faGripLines} className={classnames(classes.switch, !direction ? classes.activeSwitch : null)}/> 
+              <FontAwesomeIcon title="Switch to columns" onClick={() => handleDirection(!direction)} icon={faColumns} className={classnames(classes.switch, direction ? classes.activeSwitch : null)}/>
+          </div>
       </div>
       <div className={classnames(direction ? classes.portfolioContainerRow : classes.portfolioContainerColumn)}>
         {projects.map(item =>
