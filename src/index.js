@@ -97,7 +97,7 @@ const useStyles = createUseStyles({
   cardColumn: {
     height: 350,
     width: 300,
-    border: '2px solid #F2F5F8',
+    border: '1px solid #ddd',
     margin: '0 10px 10px',
     textAlign: 'center',
     padding: '20px 0',
@@ -116,7 +116,7 @@ const useStyles = createUseStyles({
   cardRow: {
     minWidth: '200px',
     height: 150,
-    border: '2px solid #F2F5F8',
+    border: '1px solid #ddd',
     margin: '0 10px 10px',
     padding: 10,
     textAlign: 'left',
