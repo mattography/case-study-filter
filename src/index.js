@@ -8,21 +8,40 @@ import {createUseStyles} from 'react-jss'
 import './index.css';
 
 const useStyles = createUseStyles({
+  root: {
+    maxWidth: 1200,
+    margin: '0 auto'
+  },
+  pageHeader: {
+    fontFamily: 'ToledoTS',
+    fontSize: 30,
+    color: '#283455',
+    textAlign: 'center'
+  },
   portfolioLabels: {
     justifyContent: 'center',
+    flexFlow: 'wrap',
+    fontFamily: 'Arial',
     display: 'flex',
-    backgroundColor: '#fff',
-    boxShadow: '1px 2px 2px 2px #eee',
     padding: 20,
     '& a':{
       textTransform: 'uppercase',
       padding: '0 10px 0 0',
       color: '#000000',
-      textDecoration: 'none'
+      textDecoration: 'none',
+      '&:after':{
+        content: '"/"',
+        margin: '0px -7px 0 5px',
+        color: '#000',
+        position: 'relative'
+      }
     }
   },
   switch: {
-    cursor: 'pointer'
+    cursor: 'pointer',
+    width: '40px!important',
+    border: '1px solid #ddd',
+    padding: 5
   },
   portfolioContainerRow: {
     display: 'flex',
@@ -53,6 +72,9 @@ const useStyles = createUseStyles({
     padding: 10,
     width: 'auto'
   },
+  activeSwitch: {
+    backgroundColor: '#ddd'
+  },
   tag: {
     border: '1px solid #000',
     borderRadius: 2,
@@ -64,12 +86,15 @@ const useStyles = createUseStyles({
   cardColumn: {
     height: 350,
     width: 300,
-    backgroundColor: '#fff',
-    border: '1px solid #333',
+    border: '2px solid #F2F5F8',
     margin: '0 10px 10px 0',
     textAlign: 'center',
     padding: '20px 0',
     borderRadius: 5,
+    backgroundColor: '#fff',
+    '& h3':{
+      fontFamily: 'ToledoTS'
+    },
     '&:hover':{
       borderRadius: 5,
       boxShadow: '0px 0px 5px 0px #333',
@@ -80,13 +105,14 @@ const useStyles = createUseStyles({
   cardRow: {
     minWidth: '200px',
     height: 150,
-    backgroundColor: '#eee',
-    border: '1px solid #333',
+    border: '2px solid #F2F5F8',
     margin: '0 10px 10px 0',
-    boxShadow: '0px 0px 2px 0px #000',
     padding: 10,
     textAlign: 'left',
     borderRadius: 5,
+    '& h3':{
+      fontFamily: 'ToledoTS'
+    },
     '&:hover':{
       boxShadow: '0px 0px 2px 0px #333',
       transition: 'margin-right',
@@ -127,7 +153,8 @@ const FilterGrid = () => {
     setDirection(!direction)
   }
   return (
-    <>
+    <div className={classes.root}>
+      <h2 className={classes.pageHeader}>Case Studies</h2>
       <div className={classes.portfolioLabels}>
       {uniqueCategories.map((item, i) =>
         <a href="/#" key={i} active={filter === `${item}`} onClick={() => setFilter(`${item}`)}>
@@ -136,7 +163,8 @@ const FilterGrid = () => {
       )}
       </div>
       <div className={classes.toggleSwitch}>
-      {direction ? <FontAwesomeIcon title="Switch to rows" onClick={() => handleDirection(direction)} icon={faGripLines} className={classes.switch}/> : <FontAwesomeIcon title="Switch to columns" onClick={() => handleDirection(!direction)} icon={faColumns} className={classes.switch}/>}
+          <FontAwesomeIcon title="Switch to rows" onClick={() => handleDirection(direction)} icon={faGripLines} className={classnames(classes.switch, !direction ? classes.activeSwitch : null)}/> 
+          <FontAwesomeIcon title="Switch to columns" onClick={() => handleDirection(!direction)} icon={faColumns} className={classnames(classes.switch, direction ? classes.activeSwitch : null)}/>
       </div>
       <div className={classnames(direction ? classes.portfolioContainerRow : classes.portfolioContainerColumn)}>
         {projects.map(item =>
@@ -147,7 +175,7 @@ const FilterGrid = () => {
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 }
 
