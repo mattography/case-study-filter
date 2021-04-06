@@ -9,7 +9,7 @@ import './index.css';
 
 const useStyles = createUseStyles({
   root: {
-    maxWidth: 1200,
+    maxWidth: 800,
     margin: '0 auto'
   },
   pageHeader: {
@@ -26,14 +26,14 @@ const useStyles = createUseStyles({
     padding: 20,
     '& a':{
       textTransform: 'uppercase',
-      padding: '0 10px 0 0',
+      padding: '0 10px',
       color: '#000000',
       textDecoration: 'none',
-      '&:after':{
-        content: '"/"',
-        margin: '0px -7px 0 5px',
+      '&:focus':{
         color: '#000',
-        position: 'relative'
+        backgroundColor: '#ccc',
+        padding: '0px 10px',
+        borderRadius: 4
       }
     }
   },
@@ -46,7 +46,7 @@ const useStyles = createUseStyles({
   portfolioContainerRow: {
     display: 'flex',
     flexDirection: 'row',
-    maxWidth: '80%',
+    maxWidth: '100%',
     margin: '20px auto',
     justifyContent: 'center',
     flexWrap: 'wrap'
@@ -87,7 +87,7 @@ const useStyles = createUseStyles({
     height: 350,
     width: 300,
     border: '2px solid #F2F5F8',
-    margin: '0 10px 10px 0',
+    margin: '0 10px 10px',
     textAlign: 'center',
     padding: '20px 0',
     borderRadius: 5,
@@ -106,7 +106,7 @@ const useStyles = createUseStyles({
     minWidth: '200px',
     height: 150,
     border: '2px solid #F2F5F8',
-    margin: '0 10px 10px 0',
+    margin: '0 10px 10px',
     padding: 10,
     textAlign: 'left',
     borderRadius: 5,
@@ -154,6 +154,7 @@ const FilterGrid = () => {
   }
   return (
     <div className={classes.root}>
+      <div className={classes.pageWrapper}>
       <h2 className={classes.pageHeader}>Case Studies</h2>
       <div className={classes.portfolioLabels}>
       {uniqueCategories.map((item, i) =>
@@ -174,6 +175,7 @@ const FilterGrid = () => {
             {item.category.map((tag,i) => <span className={classes.tag} key={i} active={filter === `${tag}`} onClick={() => setFilter(`${tag}`)}>{tag.toUpperCase()}</span>)}
           </div>
         )}
+      </div>
       </div>
     </div>
   );
